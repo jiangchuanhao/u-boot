@@ -140,6 +140,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3368) += \
 	rk3368-px5-evb.dtb \
 
 dtb-$(CONFIG_ROCKCHIP_RK3399) += \
+	rk3399-zysj.dtb \
 	rk3399-evb.dtb \
 	rk3399-eaidk-610.dtb \
 	rk3399-ficus.dtb \
