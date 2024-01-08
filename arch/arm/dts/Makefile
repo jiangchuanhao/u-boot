@@ -713,6 +713,7 @@ dtb-$(CONFIG_MACH_SUN6I) += \
 	sun6i-a31s-sinovoip-bpi-m2.dtb \
 	sun6i-a31s-yones-toptech-bs1078-v2.dtb
 dtb-$(CONFIG_MACH_SUN7I) += \
+	sun7i-a20-ZK202.dtb \
 	sun7i-a20-ainol-aw1.dtb \
 	sun7i-a20-bananapi.dtb \
 	sun7i-a20-bananapi-m1-plus.dtb \
