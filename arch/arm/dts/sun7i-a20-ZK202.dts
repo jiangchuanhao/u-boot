@@ -63,14 +63,14 @@
 		compatible = "gpio-leds";
 
 		led-0 {
-			label = "i12_tvbox:red:usr";
-			gpios = <&pio 7 9 GPIO_ACTIVE_LOW>;
+			label = "red led";
+			gpios = <&pio 7 22 GPIO_ACTIVE_LOW>;
 		};
 
-		led-1 {
-			label = "i12_tvbox:blue:usr";
-			gpios = <&pio 7 20 GPIO_ACTIVE_HIGH>;
-		};
+		// led-1 {
+		// 	label = "i12_tvbox:blue:usr";
+		// 	gpios = <&pio 7 20 GPIO_ACTIVE_HIGH>;
+		// };
 	};
 
 	reg_vmmc3: vmmc3 {
@@ -151,6 +151,19 @@
 	vmmc-supply = <&reg_vcc3v3>;
 	bus-width = <4>;
 	cd-gpios = <&pio 7 1 GPIO_ACTIVE_LOW>; /* PH1 */
+	status = "okay";
+};
+// MMC1不能打开，否则uboot不能从EMMC（MMC2）启动
+// &mmc1 {
+// 	vmmc-supply = <&reg_vcc3v3>;
+// 	bus-width = <4>;
+// 	non-removable;
+// 	status = "okay";
+// };
+&mmc2 {
+	vmmc-supply = <&reg_vcc3v3>;
+	bus-width = <4>;
+	non-removable;
 	status = "okay";
 };
 
