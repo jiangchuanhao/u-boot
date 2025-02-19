@@ -1,0 +1,108 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Bitmain Antminer S9 board DTS
+ *
+ * Copyright (C) 2018 Michal Simek
+ * Copyright (C) 2018 VanguardiaSur
+ */
+/dts-v1/;
+#include "zynq-7000.dtsi"
+
+/ {
+	model = "Bitmain Antminer T9 Board";
+	compatible = "bitmain,antminer-t9", "xlnx,zynq-7000";
+
+	aliases {
+		ethernet0 = &gem0;
+		serial0 = &uart1;
+		mmc0 = &sdhci0;
+		gpio0 = &gpio0;
+	};
+
+	memory@0 {
+		device_type = "memory";
+		reg = <0x0 0x40000000>;
+	};
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		bootcount@efffff0 {
+			reg = <0xefffff0 0x10>;
+			no-map;
+		};
+
+		fpga_space@f000000 {
+			reg = <0xf000000 0x1000000>;
+			no-map;
+		};
+	};
+
+	chosen {
+		bootargs = "earlycon";
+		stdout-path = "serial0:115200n8";
+	};
+};
+
+&clkc {
+	ps-clk-frequency = <33333333>;
+};
+
+&nfc0 {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	nand0 {
+    #address-cells = <1>;
+	  #size-cells = <1>;
+    // status = "okay";
+    nand-bus-width = <8>;
+    nand-ecc-mode = "soft";  // 或 "hw" 如果硬件支持ECC
+    nand-on-flash-bbt;       // 启用坏块表
+    partition@0 {
+        label = "nand-fsbl-uboot";
+        reg = <0x0 0x100000>;  // 1MB for FSBL and U-Boot
+    };
+    partition@100000 {
+        label = "nand-linux";
+        reg = <0x100000 0x500000>;  // 5MB for Linux kernel
+    };
+    partition@600000 {
+        label = "nand-rootfs";
+        reg = <0x600000 0x1FA00000>;  // 剩余空间用于根文件系统
+    };
+  };
+};
+
+&smcc {
+	status = "okay";
+};
+
+&gem0 {
+	status = "okay";
+	phy-mode = "rgmii-id";
+	phy-handle = <&ethernet_phy>;
+
+	/* 0362/5e62 */
+	ethernet_phy: ethernet-phy@1 {
+		reg = <1>;
+	};
+};
+
+&sdhci0 {
+	bootph-all;
+	status = "okay";
+	disable-wp;
+};
+
+&uart1 {
+	bootph-all;
+	status = "okay";
+};
+
+&watchdog0 {
+	// reset-on-timeout;
+	timeout-sec = <10>;
+};
