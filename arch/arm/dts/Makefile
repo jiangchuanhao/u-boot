@@ -373,6 +373,7 @@ dtb-$(CONFIG_ARCH_UNIPHIER_SLD8) += \
 	uniphier-sld8-ref.dtb
 
 dtb-$(CONFIG_ARCH_ZYNQ) += \
+	bitmain-antminer-t9.dtb \
 	bitmain-antminer-s9.dtb \
 	zynq-zc701_spray.dtb \
 	zynq-cc108.dtb \
@@ -801,7 +802,8 @@ dtb-$(CONFIG_MACH_SUN8I_H3) += \
 	sun8i-h3-orangepi-plus2e.dtb \
 	sun8i-h3-orangepi-zero-plus2.dtb \
 	sun8i-h3-rervision-dvk.dtb \
-	sun8i-h3-zeropi.dtb
+	sun8i-h3-zeropi.dtb \
+	sun8i-h3-pinidea-pi.dtb 
 dtb-$(CONFIG_MACH_SUN8I_R40) += \
 	sun8i-r40-bananapi-m2-ultra.dtb \
 	sun8i-r40-oka40i-c.dtb \
