@@ -102,7 +102,7 @@
 	status = "okay";
 };
 
-// &watchdog0 {
-// 	reset-on-timeout;
-// 	timeout-sec = <200>;
-// };
+&watchdog0 {
+	// reset-on-timeout;
+	timeout-sec = <10>;
+};
